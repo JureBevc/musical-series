@@ -67,6 +67,7 @@ class SequenceUI {
       waveType: this.waveType,
       volume: this.volume,
     };
+    console.log(obj.waveType);
     var str = JSON.stringify(obj);
     return btoa(str);
   }
@@ -85,6 +86,16 @@ class SequenceUI {
     } else if (this.keyName.split(" ")[1] == "minor") {
       this.keyTypeOffsets = Util.minorOffsets;
     }
+
+    this.octaveNode.getElementsByClassName("dropdown-toggle")[0].textContent =
+      "" + this.octaveOffset;
+    this.keyNode.getElementsByClassName(
+      "dropdown-toggle"
+    )[0].textContent = this.keyName;
+    console.log(this.waveType)
+    this.waveNode.getElementsByClassName(
+      "dropdown-toggle"
+    )[0].textContent = this.waveType;
 
     for (let i = 0; i < obj.variableNodes.length; i++) {
       addVariableToSequenceInit(

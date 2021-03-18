@@ -13,6 +13,10 @@ td {
   font-weight: bold;
 }
 
+#removeAllButton{
+  visibility: hidden;
+}
+
 .slider::-webkit-slider-thumb {
   background: gray;
 }

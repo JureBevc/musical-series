@@ -95,14 +95,15 @@ function BPMChange() {
 }
 
 function ResetAndPlay() {
+  resetSequenceState();
   SetUrlParams();
   if (!playing) return;
-  resetSequenceState();
   if (mainInterval) clearInterval(mainInterval);
   mainInterval = window.setInterval(PlayNotes, Util.bpmToMillis(currentBPM));
 }
 
 function SetUrlParams() {
+  console.log("Saving state...");
   let param = encodeURIComponent(getStateString());
   let arg = "?state=" + param;
   window.history.replaceState(null, null, arg);
@@ -119,6 +120,7 @@ function LoadStateFromUrl() {
 }
 
 function StopIfPlay() {
+  SetUrlParams();
   if (!started) return;
   if (playing) {
     playing = false;

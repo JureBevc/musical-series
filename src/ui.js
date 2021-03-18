@@ -47,6 +47,8 @@ function addNewSequence() {
 
   addVariableToSequence(seqUI, "note");
   ResetAndPlay();
+  
+  document.getElementById("removeAllButton").style.visibility = "visible";
   return seqUI;
 }
 
@@ -114,6 +116,7 @@ function removeSequenceButton(buttonElement) {
 }
 
 function removeAllSequences() {
+  document.getElementById("removeAllButton").style.visibility = "hidden";
   let nodes = document
     .getElementById("sequence-table-body")
     .getElementsByClassName("sequence-row");
@@ -258,6 +261,7 @@ function waveButton(buttonElement) {
   seqUI.waveNode.getElementsByClassName(
     "dropdown-toggle"
   )[0].textContent = waveString;
+  seqUI.waveType = waveString.trim();
   ResetAndPlay();
 }
 
