@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Music With Numbers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  </head>
+  <body class="text-light bg-dark">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <div class="dropdown">
+              <button
+                class="btn btn-dark dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Load preset
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" onclick="loadPreset(0)" href="#"
+                  >Simple linear</a
+                >
+                <a class="dropdown-item" onclick="loadPreset(1)" href="#"
+                  >Fibonacci</a
+                >
+                <a class="dropdown-item" onclick="loadPreset(2)" href="#">Pi</a>
+                <a class="dropdown-item" onclick="loadPreset(3)" href="#"
+                  >Euler</a
+                >
+                <a class="dropdown-item" onclick="loadPreset(4)" href="#"
+                  >Prime numbers</a
+                >
+              </div>
+            </div>
+          </td>
+          <td>
+            <button
+              id="playButton"
+              onclick="PlayButtonClick();"
+              type="button"
+              class="btn btn-success"
+            >
+              Play
+            </button>
+          </td>
+          <td>
+            <div class="bpm-slider-container">
+              <label for="bpmRange" class="text-light bg-dark">BPM:</label>
+              <input
+                type="range"
+                min="60"
+                max="360"
+                value="50"
+                class="slider"
+                id="bpmRange"
+                onchange="BPMChange();"
+              />
+            </div>
+          </td>
+          <td>
+            <div class="volume-slider-container">
+              <label for="volumeRange" class="text-light bg-dark"
+                >Master volume:</label
+              >
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                class="slider"
+                id="volumeRange"
+                onchange="VolumeChange();"
+              />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-dark sequence-table">
+      <thead>
+        <tr>
+          <th style="width: 25%" scope="col">Sequences</th>
+          <th style="width: 75%" scope="col">Visuals</th>
+        </tr>
+      </thead>
+      <tbody id="sequence-table-body"></tbody>
+    </table>
+    <button
+      id="addButton"
+      onclick="addNewSequence();"
+      type="button"
+      class="btn btn-success"
+    >
+      New +
+    </button>
+
+    <table id="sequence-template" hidden>
+      <tbody>
+        <tr class="sequence-row">
+          <td>
+            <div class="sequence-block bg-gradient-dark">
+              <button
+                onclick="removeSequenceButton(this);"
+                type="button"
+                class="remove-sequence-button btn btn-secondary"
+              >
+                X
+              </button>
+              <h3 class="sequence-name">Sequence #1</h3>
+
+              <div class="variable-buttons">
+                <!-- Add all variables -->
+              </div>
+              <button
+                onclick="addNewVariableButton(this);"
+                type="button"
+                class="add-variable-button btn btn-success"
+              >
+                New variable +
+              </button>
+
+              <div class="key-container">
+                <div class="dropdown">
+                  Key:
+                  <button
+                    class="btn btn-dark dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    C major
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <!-- Add all available keys -->
+                  </div>
+                </div>
+
+                <div class="octave-shift-container">
+                  <div class="dropdown">
+                    Octave shift:
+                    <button
+                      class="btn btn-dark dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      0
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a
+                        class="dropdown-item"
+                        onclick="octaveButton(this)"
+                        href="#"
+                        >2</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="octaveButton(this)"
+                        href="#"
+                        >1</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="octaveButton(this)"
+                        href="#"
+                        >0</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="octaveButton(this)"
+                        href="#"
+                        >-1</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="octaveButton(this)"
+                        href="#"
+                        >-2</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="octaveButton(this)"
+                        href="#"
+                        >-3</a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wave-type-container">
+                  <div class="dropdown">
+                    Wave type:
+                    <button
+                      class="btn btn-dark dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      sine
+                    </button>
+                    <div
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <a
+                        class="dropdown-item"
+                        onclick="waveButton(this)"
+                        href="#"
+                        >sine</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="waveButton(this)"
+                        href="#"
+                        >square</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="waveButton(this)"
+                        href="#"
+                        >sawtooth</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        onclick="waveButton(this)"
+                        href="#"
+                        >triangle</a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="volume-container">
+                  Volume:
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="100"
+                    class="slider"
+                    id="volumeRange"
+                    onchange="sequenceVolumeChange(this);"
+                  />
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="canvas-cell">
+            <canvas class="sequence-canvas" width="1440" height="266"></canvas>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="variable-data-template" hidden>
+      <div class="variable-data">
+        <button
+          onclick="removeVariableButton(this);"
+          type="button"
+          class="btn btn-danger"
+          style="padding: 0"
+        >
+          X
+        </button>
+        <button
+          onclick="changeInitialValue(this)"
+          type="button"
+          class="btn btn-dark"
+        >
+          <div>
+            <span class="initial-text"></span
+            ><span class="initial-value"></span>
+          </div>
+        </button>
+        <button
+          onclick="changeNextValue(this)"
+          type="button"
+          class="btn btn-dark"
+        >
+          <div>
+            <span class="next-text"></span><span class="next-value"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.0/math.min.js"
+      integrity="sha512-pRkiEK307FcdaOBL0UjEh6i+AZTq+utCsISMzSHV6x2YvXpVKTyV7MK28mJ0YGwqZgX/KtRiaciWLkILU9iUkA=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="src/util.js"></script>
+    <script src="src/sequence.js"></script>
+    <script src="src/sequence-ui.js"></script>
+    <script src="src/ui.js"></script>
+    <script src="src/main.js"></script>
+  </body>
+</html>

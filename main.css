@@ -1,0 +1,71 @@
+td {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  vertical-align: middle;
+}
+
+#playButton {
+  font-size: xx-large;
+}
+
+#addButton {
+  font-weight: bold;
+}
+
+.slider::-webkit-slider-thumb {
+  background: gray;
+}
+
+.slider::-moz-range-thumb {
+  background: gray;
+}
+
+.slider::-ms-thumb {
+  background: gray;
+}
+
+.add-variable-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sequence-block {
+  padding: 1%;
+  text-align: left;
+  border-style: groove;
+  border-width: 2px;
+  border-color: whitesmoke;
+  border-top: none;
+}
+
+.remove-sequence-button {
+  padding: 0;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.bpm-slider-container {
+  font-size: large;
+  padding-top: 2%;
+}
+
+.volume-slider-container {
+  font-size: large;
+  padding-top: 2%;
+}
+
+.canvas-cell {
+  box-sizing: border-box;
+  padding: 0 !important;
+  height: 100%;
+}
+.sequence-canvas {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.sequence-table{
+  height: 100%;
+}
