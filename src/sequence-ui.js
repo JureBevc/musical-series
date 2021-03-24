@@ -81,7 +81,6 @@ class SequenceUI {
     this.keyName = obj.keyName;
     this.waveType = obj.waveType;
     this.volume = obj.volume;
-    console.log("Volume load " + this.volume);
     this.keyBaseName = this.keyName.split(" ")[0];
     if (this.keyName.split(" ")[1] == "major") {
       this.keyTypeOffsets = Util.majorOffsets;

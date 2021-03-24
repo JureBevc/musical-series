@@ -36,9 +36,7 @@ function playNote(type, frequency, noteVolume, duration, fadeOut) {
   volumeCtx.connect(audioCtx.destination);
   oscillator.start(0);
 
-  console.log(duration);
   setTimeout(function () {
-    console.log("Stopping...");
     oscillator.stop();
   }, duration);
 }
