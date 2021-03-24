@@ -69,8 +69,6 @@ class SequenceUI {
       waveType: this.waveType,
       volume: this.volume,
     };
-    console.log("Volume save " + obj.volume);
-    
     var str = JSON.stringify(obj);
     return btoa(str);
   }

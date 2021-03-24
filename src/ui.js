@@ -12,7 +12,7 @@ function addNewSequence() {
   let node = sequenceTable.appendChild(newSequence);
 
   node.getElementsByClassName("sequence-name")[0].textContent =
-    "Sequence #" + sequenceNameCount;
+    "Sequence #" + (sequenceNameCount + 1);
   sequenceNameCount += 1;
 
   let seqUI = new SequenceUI();
@@ -48,7 +48,7 @@ function addNewSequence() {
 
   addVariableToSequence(seqUI, "note");
   ResetAndPlay();
-  
+
   document.getElementById("removeAllButton").style.visibility = "visible";
   return seqUI;
 }
@@ -126,27 +126,41 @@ function removeAllSequences() {
     node.remove();
   }
   uiSequences = [];
+  sequenceNameCount = 0;
   StopIfPlay();
 }
 
 function loadPreset(n) {
   let state = null;
+  if (n == 0) {
+    state =
+      "0.15%2C249%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJub3RlX2luZGV4IiwiaW5pdGlhbF9zY29wZSI6IjAifV0sIm9jdGF2ZU9mZnNldCI6MCwia2V5TmFtZSI6IkMgbWFqb3IiLCJ3YXZlVHlwZSI6InNpbmUiLCJ2b2x1bWUiOjF9%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMSw0LC0xXVtub3RlX2luZGV4ICUgNCArIDFdIiwiaW5pdGlhbF9zY29wZSI6IjAifV0sIm9jdGF2ZU9mZnNldCI6LTIsImtleU5hbWUiOiJDIG1ham9yIiwid2F2ZVR5cGUiOiJzcXVhcmUiLCJ2b2x1bWUiOjAuNTN9";
+  } else if (n == 1) {
+    state =
+      "0.15%2C249%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJ4IiwiaW5pdGlhbF9zY29wZSI6IjAifSx7Im5hbWUiOiJ4IiwiZXhwcmVzc2lvbiI6Im5vdGVfaW5kZXggJSAxNiA9PSAwID8gMCA6IHkiLCJpbml0aWFsX3Njb3BlIjoiMCJ9LHsibmFtZSI6InkiLCJleHByZXNzaW9uIjoibm90ZV9pbmRleCAlIDE2ID09IDAgPyAxIDogeCt5IiwiaW5pdGlhbF9zY29wZSI6MX1dLCJvY3RhdmVPZmZzZXQiOjAsImtleU5hbWUiOiJEIG1ham9yIiwid2F2ZVR5cGUiOiJ0cmlhbmdsZSIsInZvbHVtZSI6MC44Mn0%3D%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMV1bbm90ZV9pbmRleCAlIDIgKzFdIiwiaW5pdGlhbF9zY29wZSI6IjAifV0sIm9jdGF2ZU9mZnNldCI6LTMsImtleU5hbWUiOiJEIG1ham9yIiwid2F2ZVR5cGUiOiJzYXd0b290aCIsInZvbHVtZSI6MC4xNH0%3D%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMSw0LDRdW25vdGVfaW5kZXggJSA0ICsgMV0iLCJpbml0aWFsX3Njb3BlIjoiMCJ9XSwib2N0YXZlT2Zmc2V0IjotMywia2V5TmFtZSI6IkQgbWFqb3IiLCJ3YXZlVHlwZSI6InNxdWFyZSIsInZvbHVtZSI6MC4xOX0%3D";
+  } else if (n == 2) {
+    state =
+      "0.15%2C306%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJwaSBeIGRlY2ltYWwgJSAxMCIsImluaXRpYWxfc2NvcGUiOiIwIn0seyJuYW1lIjoiZGVjaW1hbCIsImV4cHJlc3Npb24iOiIobm90ZV9pbmRleCsxKSAlIDE2ICsgMSIsImluaXRpYWxfc2NvcGUiOjF9XSwib2N0YXZlT2Zmc2V0IjoxLCJrZXlOYW1lIjoiQyBtYWpvciIsIndhdmVUeXBlIjoidHJpYW5nbGUiLCJ2b2x1bWUiOjAuNDN9%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCw0LC0xLDRdW25vdGVfaW5kZXggJSA0ICsgMV0iLCJpbml0aWFsX3Njb3BlIjoiMCJ9XSwib2N0YXZlT2Zmc2V0IjotMiwia2V5TmFtZSI6IkMgbWFqb3IiLCJ3YXZlVHlwZSI6InRyaWFuZ2xlIiwidm9sdW1lIjowLjQyfQ%3D%3D";
+  } else if (n == 3){
+    state = 
+    "0.15%2C360%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJlIF4gZGVjaW1hbCAlIDEwIiwiaW5pdGlhbF9zY29wZSI6IjAifSx7Im5hbWUiOiJkZWNpbWFsIiwiZXhwcmVzc2lvbiI6Iihub3RlX2luZGV4KzEpICUgMTYgKyAxIiwiaW5pdGlhbF9zY29wZSI6MX1dLCJvY3RhdmVPZmZzZXQiOjEsImtleU5hbWUiOiJDIG1ham9yIiwid2F2ZVR5cGUiOiJzaW5lIiwidm9sdW1lIjowLjQzfQ%3D%3D%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMSwwLC0xLC0xLDAsNCwtMV1bbm90ZV9pbmRleCAlIDggKyAxXSIsImluaXRpYWxfc2NvcGUiOiIwIn1dLCJvY3RhdmVPZmZzZXQiOi0yLCJrZXlOYW1lIjoiQyBtYWpvciIsIndhdmVUeXBlIjoic3F1YXJlIiwidm9sdW1lIjowLjExfQ%3D%3D%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMSwtMSwtMV1bbm90ZV9pbmRleCAlIDQgKyAxXSIsImluaXRpYWxfc2NvcGUiOiIwIn1dLCJvY3RhdmVPZmZzZXQiOi0zLCJrZXlOYW1lIjoiQyBtYWpvciIsIndhdmVUeXBlIjoic3F1YXJlIiwidm9sdW1lIjowLjI0fQ%3D%3D";
+  } else if (n == 4){
+    state = 
+    "0.15%2C251%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJuICoobl4yICsgMSkgLyAyIiwiaW5pdGlhbF9zY29wZSI6IjAifSx7Im5hbWUiOiJuIiwiZXhwcmVzc2lvbiI6Im5vdGVfaW5kZXggJSAxNiA9PSAwID8gMyA6IG4gKyAxIiwiaW5pdGlhbF9zY29wZSI6M31dLCJvY3RhdmVPZmZzZXQiOi0xLCJrZXlOYW1lIjoiQyBtaW5vciIsIndhdmVUeXBlIjoidHJpYW5nbGUiLCJ2b2x1bWUiOjAuNDN9%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMSwwLC0xLC0xLDAsNCwtMV1bbm90ZV9pbmRleCAlIDggKyAxXSIsImluaXRpYWxfc2NvcGUiOiIwIn1dLCJvY3RhdmVPZmZzZXQiOi0yLCJrZXlOYW1lIjoiQyBtaW5vciIsIndhdmVUeXBlIjoic2F3dG9vdGgiLCJ2b2x1bWUiOjAuMTF9%2CeyJ2YXJpYWJsZU5vZGVzIjpbeyJuYW1lIjoibm90ZSIsImV4cHJlc3Npb24iOiJbMCwtMSwtMSwwXVtub3RlX2luZGV4ICUgNCArIDFdIiwiaW5pdGlhbF9zY29wZSI6IjAifV0sIm9jdGF2ZU9mZnNldCI6LTMsImtleU5hbWUiOiJDIG1pbm9yIiwid2F2ZVR5cGUiOiJzaW5lIiwidm9sdW1lIjowLjU5fQ%3D%3D";
+  }
   if (state) loadState(state);
 }
 
 function loadState(state) {
-  console.log("Loading state " + state);
   removeAllSequences();
   let decoded = decodeURIComponent(state);
   let spl = decoded.split(",");
   for (let i = 0; i < spl.length; i++) {
     if (i == 0) {
       let p = parseFloat(spl[i]);
-      console.log("Volume " + p);
       if (!isNaN(p)) globalVolume = p;
     } else if (i == 1) {
       let p = parseInt(spl[i]);
-      console.log("BPM " + p);
       if (!isNaN(p)) currentBPM = p;
     } else {
       let seqUI = addNewSequence();
