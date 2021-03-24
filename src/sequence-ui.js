@@ -35,8 +35,8 @@ class SequenceUI {
     this.waveType = this.waveNode
       .getElementsByClassName("dropdown-toggle")[0]
       .textContent.trim();
-
-    this.volume = this.volumeNode.getElementsByClassName("slider")[0].value / 100;
+    
+    this.volume = this.volumeNode.getElementsByTagName("input")[0].value / 100;
 
     this.keyBaseName = this.keyName.split(" ")[0];
     if (this.keyName.split(" ")[1] == "major") {
@@ -98,7 +98,7 @@ class SequenceUI {
     this.waveNode.getElementsByClassName(
       "dropdown-toggle"
     )[0].textContent = this.waveType;
-    this.volumeNode.getElementsByClassName("slider")[0].value = this.volume * 100;
+    this.volumeNode.getElementsByTagName("input")[0].value = this.volume * 100;
 
     for (let i = 0; i < obj.variableNodes.length; i++) {
       addVariableToSequenceInit(

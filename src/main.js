@@ -21,7 +21,7 @@ function playNote(type, frequency, noteVolume, duration, fadeOut) {
 
   // Fade out
   let gainCtx = audioCtx.createGain();
-  gainCtx.gain.exponentialRampToValueAtTime(
+  gainCtx.gain.linearRampToValueAtTime(
     0.00001,
     audioCtx.currentTime + fadeOut
   );
@@ -36,7 +36,9 @@ function playNote(type, frequency, noteVolume, duration, fadeOut) {
   volumeCtx.connect(audioCtx.destination);
   oscillator.start(0);
 
+  console.log(duration);
   setTimeout(function () {
+    console.log("Stopping...");
     oscillator.stop();
   }, duration);
 }
@@ -76,7 +78,7 @@ function PlayNotes() {
         Util.noteFromName(seqUI.keyBaseName),
         seqUI.keyTypeOffsets
       );
-      playNote(seqUI.waveType, frequency, seqUI.volume, 1000, 1);
+      playNote(seqUI.waveType, frequency, seqUI.volume, 1000, 0.3);
     }
   }
   note_index = note_index + 1;
