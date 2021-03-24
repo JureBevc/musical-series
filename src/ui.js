@@ -20,6 +20,7 @@ function addNewSequence() {
   seqUI.octaveNode = node.getElementsByClassName("octave-shift-container")[0];
   seqUI.keyNode = node.getElementsByClassName("key-container")[0];
   seqUI.waveNode = node.getElementsByClassName("wave-type-container")[0];
+  seqUI.volumeNode = node.getElementsByClassName("volume-container")[0];
   seqUI.ctx = node
     .getElementsByClassName("sequence-canvas")[0]
     .getContext("2d");
@@ -134,15 +135,18 @@ function loadPreset(n) {
 }
 
 function loadState(state) {
+  console.log("Loading state " + state);
   removeAllSequences();
   let decoded = decodeURIComponent(state);
   let spl = decoded.split(",");
   for (let i = 0; i < spl.length; i++) {
     if (i == 0) {
       let p = parseFloat(spl[i]);
+      console.log("Volume " + p);
       if (!isNaN(p)) globalVolume = p;
     } else if (i == 1) {
       let p = parseInt(spl[i]);
+      console.log("BPM " + p);
       if (!isNaN(p)) currentBPM = p;
     } else {
       let seqUI = addNewSequence();
@@ -252,6 +256,7 @@ function sequenceVolumeChange(buttonElement) {
   let node = findParentNodeWithClass(buttonElement, "sequence-row");
   let seqUI = findSequenceUI(node);
   seqUI.updateVolume(buttonElement.value);
+  SetUrlParams();
 }
 
 function waveButton(buttonElement) {

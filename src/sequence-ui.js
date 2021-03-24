@@ -36,6 +36,8 @@ class SequenceUI {
       .getElementsByClassName("dropdown-toggle")[0]
       .textContent.trim();
 
+    this.volume = this.volumeNode.getElementsByClassName("slider")[0].value / 100;
+
     this.keyBaseName = this.keyName.split(" ")[0];
     if (this.keyName.split(" ")[1] == "major") {
       this.keyTypeOffsets = Util.majorOffsets;
@@ -67,7 +69,8 @@ class SequenceUI {
       waveType: this.waveType,
       volume: this.volume,
     };
-    console.log(obj.waveType);
+    console.log("Volume save " + obj.volume);
+    
     var str = JSON.stringify(obj);
     return btoa(str);
   }
@@ -80,6 +83,7 @@ class SequenceUI {
     this.keyName = obj.keyName;
     this.waveType = obj.waveType;
     this.volume = obj.volume;
+    console.log("Volume load " + this.volume);
     this.keyBaseName = this.keyName.split(" ")[0];
     if (this.keyName.split(" ")[1] == "major") {
       this.keyTypeOffsets = Util.majorOffsets;
@@ -92,10 +96,11 @@ class SequenceUI {
     this.keyNode.getElementsByClassName(
       "dropdown-toggle"
     )[0].textContent = this.keyName;
-    console.log(this.waveType)
+    
     this.waveNode.getElementsByClassName(
       "dropdown-toggle"
     )[0].textContent = this.waveType;
+    this.volumeNode.getElementsByClassName("slider")[0].value = this.volume * 100;
 
     for (let i = 0; i < obj.variableNodes.length; i++) {
       addVariableToSequenceInit(

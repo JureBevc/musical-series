@@ -84,6 +84,7 @@ function PlayNotes() {
 
 function VolumeChange() {
   globalVolume = volumeRange.value / 100;
+  SetUrlParams();
 }
 
 function BPMChange() {
@@ -92,6 +93,7 @@ function BPMChange() {
     if (mainInterval) clearInterval(mainInterval);
     mainInterval = window.setInterval(PlayNotes, Util.bpmToMillis(currentBPM));
   }
+  SetUrlParams();
 }
 
 function ResetAndPlay() {
@@ -146,9 +148,9 @@ function PlayButtonClick() {
 function init() {
   bpmRange.value = currentBPM;
   volumeRange.value = globalVolume * 100;
+  LoadStateFromUrl();
   VolumeChange();
   BPMChange();
-  LoadStateFromUrl();
 }
 
 function start() {
