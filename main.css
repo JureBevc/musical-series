@@ -17,6 +17,10 @@ td {
   visibility: hidden;
 }
 
+#copyUrlButton {
+  visibility: hidden;
+}
+
 .slider::-webkit-slider-thumb {
   background: gray;
 }
