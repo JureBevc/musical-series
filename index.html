@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Music With Numbers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel='icon' type='image/x-icon' href='favicon.ico' />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,6 +23,17 @@
       <tbody>
         <tr>
           <td>
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-dark"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              How to use
+            </button>
+          </td>
+          <td>
             <div class="dropdown">
               <button
                 class="btn btn-dark dropdown-toggle"
@@ -32,7 +43,7 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Load preset
+                <b>Load preset</b>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" onclick="loadPreset(0)" href="#"
@@ -111,13 +122,13 @@
       New +
     </button>
     <button
-    id="removeAllButton"
-    onclick="removeAllSequences();"
-    type="button"
-    class="btn btn-dark"
-  >
-    Clear all
-  </button>
+      id="removeAllButton"
+      onclick="removeAllSequences();"
+      type="button"
+      class="btn btn-dark"
+    >
+      Clear all
+    </button>
 
     <table id="sequence-template" hidden>
       <tbody>
@@ -132,7 +143,8 @@
                 X
               </button>
               <h3 class="sequence-name">Sequence #1</h3>
-              <hr class="dotted">
+              <hr class="dotted" />
+              <b>Variables:</b>
               <div class="variable-buttons">
                 <!-- Add all variables -->
               </div>
@@ -143,7 +155,7 @@
               >
                 New variable +
               </button>
-              <hr class="dotted">
+              <hr class="dotted" />
               <div class="key-container">
                 <div class="dropdown">
                   Key:
@@ -316,6 +328,64 @@
             <span class="next-text"></span><span class="next-value"></span>
           </div>
         </button>
+      </div>
+    </div>
+
+    <div class="toast" data-autohide="false">
+      <div class="toast-header bg-dark">
+        <button type="button" class="ml-2 mb-1 close bg-danger" data-dismiss="toast">&times;</button>
+        <strong class="mr-auto text-primary text-danger">Error in sequence</strong>
+      </div>
+      <div id="toast-text" class="toast-body bg-dark">
+        Some text inside the toast body
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <h5 class="modal-title" id="exampleModalLabel">How to use</h5>
+          </div>
+          <div class="modal-body bg-dark">
+            <h3>Playing notes</h3>
+            Every sequence has a variable called <b>note</b> that determines what note in the scale will play.<br>
+            Example: note values <b>0,1,2</b> will play notes <b>C,D,E</b> if the C major scale is selected.
+            <h3 style="margin-top: 5%;">Variables</h3>
+            Variables change their value every time a note is played. They start with an <b>initial</b> value and their <b>next</b> value is calculated using a custom math expression.<br>
+            Example: If we set the initial value for variable <b>note</b> to 0 and its next expression to <b>note + 1</b>, then we get a sequence <b>0,1,2,3,4,...</b>
+            <br>
+            <br>
+            You can use multiple variables to help you construct your note sequence. Click <b>Load presets</b> to see some examples.
+
+            <h3 style="margin-top: 5%;">Tips</h3>
+            You can use an internal variable called <b>note_index</b> that is always set to the current note count.<br>
+            Example: A variable with a next value set to <b>note_index</b> will produce values <b>0,1,2,3,...</b>
+            <br>
+            <br>
+            You can also use lists of numbers in your expressions. Example:<br>
+            A variable set to expression <b>[0,1,2,3][1]</b> will extract the first number from the list, which is 0.
+            <br>
+            Visit <a href="https://mathjs.org/docs/expressions/syntax.html">this page</a> for a full list of supported operators.
+
+
+            <h3 style="margin-top: 5%;">Settings</h3>
+            Adjust the beats per minute with the <b>BPM slider</b>.
+          </div>
+          <div class="modal-footer bg-dark">
+            <button type="button" class="btn btn-success" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 

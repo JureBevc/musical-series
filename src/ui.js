@@ -90,10 +90,10 @@ function updateSequenceVariables(seqUI) {
   for (let i = 0; i < names.length; i++) {
     let variableName = names[i];
     let varNode = seqUI.variableNodes[variableName];
-    varNode.getElementsByClassName("initial-text")[0].textContent =
-      "Initial " + variableName + ": ";
-    varNode.getElementsByClassName("next-text")[0].textContent =
-      "Next " + variableName + ": ";
+    varNode.getElementsByClassName("initial-text")[0].innerHTML =
+      "Initial <b>" + variableName + "</b>: ";
+    varNode.getElementsByClassName("next-text")[0].innerHTML =
+      "Next <b>" + variableName + "</b>: ";
     varNode.getElementsByClassName("initial-value")[0].textContent =
       seqUI.sequence.initial_scope[variableName];
     varNode.getElementsByClassName("next-value")[0].textContent =
