@@ -366,7 +366,7 @@
           <div class="modal-body bg-dark">
             <h3>Playing notes</h3>
             Every sequence has a variable called <b>note</b> that determines what note in the scale will play.<br>
-            Example: note values <b>0,1,2</b> will play notes <b>C,D,E</b> if the C major scale is selected.
+            Example: note values <b>0,1,2</b> will play notes <b>C,D,E</b> if the C major scale is selected. The values than loop around the octave, such that numbers 7,8,9 again play notes C,D,E.
             <h3 style="margin-top: 5%;">Variables</h3>
             Variables change their value every time a note is played. They start with an <b>initial</b> value and their <b>next</b> value is calculated using a custom math expression.<br>
             Example: If we set the initial value for variable <b>note</b> to 0 and its next expression to <b>note + 1</b>, then we get a sequence <b>0,1,2,3,4,...</b>

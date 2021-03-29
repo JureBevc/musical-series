@@ -60,12 +60,12 @@ function PlayNotes() {
   for (let i = 0; i < sequences.length; i++) {
     let seqUI = sequences[i];
     let s = seqUI.sequence.next_iter(note_index);
-    let sAbs = Math.abs(s);
+    let sAbs = parseInt(Math.abs(s));
     seqUI.canvasParticles.unshift({
       x: 0,
       y: (sAbs % seqUI.keyTypeOffsets.length) / seqUI.keyTypeOffsets.length,
       w: 50,
-      h: 1 / seqUI.keyTypeOffsets.length,
+      h: 0.7 / seqUI.keyTypeOffsets.length,
       v: s,
     });
 

@@ -141,13 +141,13 @@ class SequenceUI {
       if (p.v > 999) {
         c.fillText(
           "..." + (Math.round(p.v) % 1000),
-          p.x - p.w + 2,
+          p.x - p.w + 15,
           h - p.y * h - 3
         );
       } else {
         c.fillText(
           "" + Math.round(p.v * 100) / 100,
-          p.x - p.w + 2,
+          p.x - p.w + 15,
           h - p.y * h - 3
         );
       }
